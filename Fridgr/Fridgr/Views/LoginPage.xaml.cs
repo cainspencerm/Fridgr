@@ -13,9 +13,19 @@ namespace Fridgr.Views
         public LoginPage()
         {
             InitializeComponent();
+            Init();
         }
 
-        public void loginProdecure(object sender, EventArgs e)
+        void Init()
+        {
+            BackgroundColor = Constants.background;
+            Spinner.IsVisible = false;
+
+            entry_user.Completed += (s, e) => entry_pw.Focus();
+            entry_pw.Completed += (s, e) => loginProdecure(s, e);
+        }
+
+        void loginProdecure(object sender, EventArgs e)
         {
             User user = new User(entry_user.Text, entry_pw.Text);
             if(user.checkLogin())

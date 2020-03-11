@@ -2,11 +2,29 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fridgr.Views.LoginPage">
-    <StackLayout>
-        <Label x:Name="label_user" Text="Username" />
-        <Entry x:Name="entry_user" Placeholder="Username" />
-        <Label x:Name="label_pw" Text="Password" />
-        <Entry x:Name="entry_pw" Placeholder="Password" />
-        <Button x:Name="btn_login" Text="Log In" Clicked="loginProdecure" />
+    <StackLayout x:Name="MasterLayout">
+
+        <StackLayout x:Name="TitleLayout">
+            <Label x:Name="label_title" Text="Fridgr" />
+        </StackLayout>
+
+        <StackLayout x:Name="DescLayout">
+            <Label x:Name="label_desc" Text="Log In or Register" />
+        </StackLayout>
+
+        <StackLayout x:Name="LoginEntriesStack" VerticalOptions="StartAndExpand">
+            <StackLayout.Padding>
+                <OnIdiom x:TypeArguments="Thickness">
+                    <OnIdiom.Phone>40,0,40,0</OnIdiom.Phone>
+                </OnIdiom>
+            </StackLayout.Padding>
+
+            <ActivityIndicator x:Name="Spinner" Color="LightSlateGray" IsRunning="True" />
+
+            <Entry x:Name="entry_user" Placeholder="Username" PlaceholderColor="LightGray" />
+            <Entry x:Name="entry_pw" Placeholder="Password" PlaceholderColor="LightGray" />
+            <Button x:Name="btn_login" Text="Log In" Clicked="loginProdecure" />
+
+        </StackLayout>
     </StackLayout>
 </ContentPage>
