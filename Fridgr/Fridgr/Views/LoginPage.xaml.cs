@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Fridgr.Models;
+using Fridgr.Models.Database;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
