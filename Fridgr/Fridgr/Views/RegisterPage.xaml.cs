@@ -35,7 +35,7 @@ namespace Fridgr.Views
             }
 
             User user = new User(entry_fname.Text, entry_lname.Text, entry_email.Text, entry_pw.Text);
-            App.users.InsertOne(user);
+            App.UserCollection.InsertOne(user);
 
         }
 
@@ -47,7 +47,7 @@ namespace Fridgr.Views
                 !string.IsNullOrWhiteSpace(lname) &&
                 email.Contains("@") &&
                 pw.Length > 6 &&
-                !App.users.Equals(email))
+                !App.UserCollection.Equals(email))
             {
                 return true;
             }

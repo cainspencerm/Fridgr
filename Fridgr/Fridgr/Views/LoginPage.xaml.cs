@@ -52,8 +52,8 @@ namespace Fridgr.Views
         {
             if (email != null && pw != null)
             {
-                var user = App.users.Find(u => u.email == email).Limit(1).ToListAsync().Result;
-                return user.ElementAt(0).password == pw;
+                var user = App.UserCollection.Find(u => u.email == email).Limit(1).ToListAsync().Result;
+                return user.Count > 0 && user.ElementAt(0).password == pw;
             }
             else return false;
         }
