@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fridgr.Views.RegisterPage">
+    <StackLayout x:Name="MasterLayout">
+
+        <StackLayout x:Name="TitleLayout">
+            <Label x:Name="label_title" Text="Fridgr" />
+        </StackLayout>
+
+        <StackLayout x:Name="DescLayout">
+            <Label x:Name="label_desc" Text="Register" />
+        </StackLayout>
+
+        <StackLayout x:Name="LoginEntriesStack" VerticalOptions="StartAndExpand">
+            <StackLayout.Padding>
+                <OnIdiom x:TypeArguments="Thickness">
+                    <OnIdiom.Phone>40,0,40,0</OnIdiom.Phone>
+                </OnIdiom>
+            </StackLayout.Padding>
+
+            <ActivityIndicator x:Name="Spinner" Color="LightSlateGray" IsRunning="True" />
+
+            <Entry x:Name="entry_fname" Placeholder="First Name" PlaceholderColor="LightGray" />
+            <Entry x:Name="entry_lname" Placeholder="Last Name" PlaceholderColor="LightGray" />
+            <Entry x:Name="entry_email" Placeholder="Email" PlaceholderColor="LightGray" />
+            <Entry x:Name="entry_pw" Placeholder="Password" PlaceholderColor="LightGray" />
+            <Button x:Name="btn_register" Text="Register" Clicked="CreateNewAcct" />
+
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

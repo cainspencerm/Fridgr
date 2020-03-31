@@ -14,10 +14,11 @@ namespace Fridgr
     public partial class App : Application
     {
         public static IMongoCollection<User> users;
+
         public App()
         {
             InitializeComponent();
-            MainPage = new LoginPage();
+            MainPage = new NavigationPage(new LoginPage());     // need NavigationPage to support PushAsync
         }
 
         protected override void OnStart()

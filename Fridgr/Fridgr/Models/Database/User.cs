@@ -15,20 +15,26 @@ namespace Fridgr.Models.Database
         public Food.Food[] foods { get; set; }
 
         public User() { }
-        public User(string email, string password)
+        public User(string firstName, string lastName, string email, string password)
         {
+            this.firstName = firstName;
+            this.lastName = lastName;
             this.email = email;
             this.password = password;
         }
 
-        public bool checkLogin()
-        {
-            if (this.email == null || this.password == null)
-                return false;
-            
-            var user = App.users.Find(u => u.email == "smc16s@my.fsu.edu").Limit(1).ToListAsync().Result;
-            return user.ElementAt(0).password == password;
+        //public bool CheckLogin(string email, string password)
+        //{
+        //    if (email != null && password != null)
+        //    {
+        //        var user = App.users.Find(u => u.email == email).Limit(1).ToListAsync().Result;
+        //        return user.ElementAt(0).password == password;
+        //    }
+        //    else return false;
 
-        }
+        //    //var user = App.users.Find(u => u.email == email).Limit(1).ToListAsync().Result;
+        //    //return user.ElementAt(0).password == password;
+
+        //}
     }
 }
