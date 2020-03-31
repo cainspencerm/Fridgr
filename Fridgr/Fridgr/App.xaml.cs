@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Fridgr.Services;
+﻿using Xamarin.Forms;
 using Fridgr.Views;
 using Fridgr.Models.Database;
-using MongoDB.Bson;
 using MongoDB.Driver;
-using Fridgr.Models;
 
 namespace Fridgr
 {
     public partial class App : Application
     {
-        public static IMongoCollection<User> users;
+        public static IMongoCollection<User> UserCollection;
+        public static IMongoCollection<FoodItem> FoodItemCollection;
+        
         public App()
         {
             InitializeComponent();
@@ -22,11 +18,10 @@ namespace Fridgr
 
         protected override void OnStart()
         {
-            var client = new MongoClient(Constants.connectionString);
-            var database = client.GetDatabase("fridgr");
-            users = database.GetCollection<User>("User");
-
-            //if (users != null) Console.WriteLine("Connected to users.");
+            var client = new MongoClient("mongodb+srv://user:BzypQCaeTwbudvWt@fridgr-bs8ph.gcp.mongodb.net/test?retryWrites=true&w=majority");
+            var database = client.GetDatabase("Fridgr");
+            UserCollection = database.GetCollection<User>("User");
+            FoodItemCollection = database.GetCollection<FoodItem>("FoodItems");
         }
 
         protected override void OnSleep()
