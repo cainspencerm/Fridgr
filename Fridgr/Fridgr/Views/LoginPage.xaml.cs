@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.Generic;
-
 using MongoDB.Driver;
-using MongoDB.Bson;
 using Fridgr.Models;
-using Fridgr.Models.Database;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -30,11 +26,9 @@ namespace Fridgr.Views
 
         async void loginProdecure(object sender, EventArgs e)
         {
-            //User user = new User(entry_email.Text, entry_pw.Text);
             if (CheckLogin(entry_email.Text, entry_pw.Text))
             {
-                await DisplayAlert("Login Successful", "Login Successful", "Continue");
-                //await PushAsync
+                await Navigation.PushAsync(new MainPage());
             } else
             {
                 await DisplayAlert("Login Error", "Invalid email or password", "Retry");
@@ -44,7 +38,6 @@ namespace Fridgr.Views
 
         async void registerProcedure(object sender, EventArgs e)
         {
-            //await DisplayAlert("Register", "Register New User", "Create New Account");
             await Navigation.PushAsync(new RegisterPage());
         }
 

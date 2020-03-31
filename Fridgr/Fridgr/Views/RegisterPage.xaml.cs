@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using Fridgr.Models;
 using Fridgr.Models.Database;
 using Xamarin.Forms;
 using MongoDB.Driver;
-using MongoDB.Bson;
 
 namespace Fridgr.Views
 {
@@ -29,29 +27,58 @@ namespace Fridgr.Views
 
         async void CreateNewAcct(object sender, EventArgs e)
         {
-            if(!validDetails(entry_fname.Text, entry_lname.Text, entry_email.Text, entry_pw.Text))
+            if (validDetails(entry_fname.Text, entry_lname.Text, entry_email.Text, entry_pw.Text))
             {
-                await DisplayAlert("Registration Error", "One or more of the fields is invalid", "Retry");
+                User user = new User(entry_fname.Text, entry_lname.Text, entry_email.Text, entry_pw.Text);
+                App.UserCollection.InsertOne(user);
+                await Navigation.PushAsync(new LoginPage());
+            } else
+            {
+               await DisplayAlert("Registration Error", errormsg, "Retry");
             }
 
-            User user = new User(entry_fname.Text, entry_lname.Text, entry_email.Text, entry_pw.Text);
-            App.UserCollection.InsertOne(user);
+            
 
         }
 
-        bool validDetails(string fname, string lname, string email, string pw)
+        public string errormsg = "";
+        bool validDetails(string fname, string lname, string emailaddr, string pw)
         {
-            if (!string.IsNullOrWhiteSpace(email) &&
-                !string.IsNullOrWhiteSpace(pw) &&
-                !string.IsNullOrWhiteSpace(fname) &&
-                !string.IsNullOrWhiteSpace(lname) &&
-                email.Contains("@") &&
-                pw.Length > 6 &&
-                !App.UserCollection.Equals(email))
+            if (!string.IsNullOrWhiteSpace(emailaddr) && !string.IsNullOrWhiteSpace(pw) && !string.IsNullOrWhiteSpace(fname) && !string.IsNullOrWhiteSpace(lname))
             {
-                return true;
+                if (emailaddr.Contains("@"))
+                {
+                    if (pw.Length >= 6)
+                    {
+                        var user = App.UserCollection.Find(u => u.email == emailaddr).Limit(1).ToListAsync().Result;
+                        if (user.Count == 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            errormsg = "Email already in use";
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        errormsg = "Password length must be at least 6 characters long";
+                        return false;
+                    }
+                }
+                else
+                {
+                    errormsg = "Invalid email address";
+                    return false;
+                }
+
             }
-            else return false;
+            else
+            {
+                errormsg = "One or more of the fields is empty";
+                return false;
+            }
         }
     }
 }
