@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
+using MongoDB.Driver;
+using MongoDB.Bson;
 using Fridgr.Models;
 using Fridgr.Models.Database;
 using Xamarin.Forms;
@@ -20,23 +23,39 @@ namespace Fridgr.Views
         void Init()
         {
             BackgroundColor = Constants.background;
-            Spinner.IsVisible = false;
 
-            entry_user.Completed += (s, e) => entry_pw.Focus();
+            entry_email.Completed += (s, e) => entry_pw.Focus();
             entry_pw.Completed += (s, e) => loginProdecure(s, e);
         }
 
-        void loginProdecure(object sender, EventArgs e)
+        async void loginProdecure(object sender, EventArgs e)
         {
-            User user = new User(entry_user.Text, entry_pw.Text);
-            if(user.checkLogin())
+            //User user = new User(entry_email.Text, entry_pw.Text);
+            if (CheckLogin(entry_email.Text, entry_pw.Text))
             {
-                DisplayAlert("Login Successful", "Login Successful", "Continue");
+                await DisplayAlert("Login Successful", "Login Successful", "Continue");
+                //await PushAsync
             } else
             {
-                DisplayAlert("Login Error", "Empty username or password", "Retry");
+                await DisplayAlert("Login Error", "Invalid email or password", "Retry");
             }
 
+        }
+
+        async void registerProcedure(object sender, EventArgs e)
+        {
+            //await DisplayAlert("Register", "Register New User", "Create New Account");
+            await Navigation.PushAsync(new RegisterPage());
+        }
+
+        public bool CheckLogin(string email, string pw)
+        {
+            if (email != null && pw != null)
+            {
+                var user = App.users.Find(u => u.email == email).Limit(1).ToListAsync().Result;
+                return user.ElementAt(0).password == pw;
+            }
+            else return false;
         }
     }
 }

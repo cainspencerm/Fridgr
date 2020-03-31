@@ -1,7 +1,13 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using System.Collections.ObjectModel;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+using Fridgr.Services;
 using Fridgr.Views;
 using Fridgr.Models.Database;
+using MongoDB.Bson;
 using MongoDB.Driver;
+using Fridgr.Models;
 
 namespace Fridgr
 {
@@ -13,7 +19,7 @@ namespace Fridgr
         public App()
         {
             InitializeComponent();
-            MainPage = new LoginPage();
+            MainPage = new NavigationPage(new LoginPage());     // need NavigationPage to support PushAsync
         }
 
         protected override void OnStart()

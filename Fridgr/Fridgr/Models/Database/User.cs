@@ -21,8 +21,10 @@ namespace Fridgr.Models.Database
         public Food[] foods { get; set; }
 
         public User() { }
-        public User(string email, string password)
+        public User(string firstName, string lastName, string email, string password)
         {
+            this.firstName = firstName;
+            this.lastName = lastName;
             this.email = email;
             this.password = password;
         }

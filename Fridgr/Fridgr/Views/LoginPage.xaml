@@ -21,9 +21,10 @@
 
             <ActivityIndicator x:Name="Spinner" Color="LightSlateGray" IsRunning="True" />
 
-            <Entry x:Name="entry_user" Placeholder="Username" PlaceholderColor="LightGray" />
+            <Entry x:Name="entry_email" Placeholder="Email" PlaceholderColor="LightGray" />
             <Entry x:Name="entry_pw" Placeholder="Password" PlaceholderColor="LightGray" />
             <Button x:Name="btn_login" Text="Log In" Clicked="loginProdecure" />
+            <Button x:Name="btn_register" Text="Register" Clicked="registerProcedure" />
 
         </StackLayout>
     </StackLayout>
