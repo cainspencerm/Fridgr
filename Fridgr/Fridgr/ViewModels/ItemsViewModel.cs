@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 
 using Fridgr.Models;
+using Fridgr.Services;
 using Fridgr.Views;
 
 namespace Fridgr.ViewModels
@@ -43,6 +44,7 @@ namespace Fridgr.ViewModels
                 foreach (var item in items)
                 {
                     Items.Add(item);
+                    Console.WriteLine(item.Text);
                 }
             }
             catch (Exception ex)
