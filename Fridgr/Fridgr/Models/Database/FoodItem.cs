@@ -8,7 +8,7 @@ namespace Fridgr.Models.Database
 {
     public class FoodItem
     {
-        private ObjectId Id { get; set; }
+        public ObjectId Id { get; set; }
         [BsonElement("foodName")] public string FoodName { get; set; }
         [BsonElement("brandName")] public string BrandName { get; set; }
         [BsonElement("nutrition")] public Nutrition Nutrition { get; set; }
@@ -46,22 +46,42 @@ namespace Fridgr.Models.Database
 
     public class Nutrition
     {
-        [BsonElement("calories")] private int Calories { get; set; }
-        [BsonElement("totalFat")] private double TotalFat { get; set; }
-        [BsonElement("saturatedFat")] private double SaturatedFat { get; set; }
-        [BsonElement("transFat")] private double TransFat { get; set; }
-        [BsonElement("cholesterol")] private double Cholesterol { get; set; }
-        [BsonElement("sodium")] private double Sodium { get; set; }
-        [BsonElement("totalCarbohydrate")] private int TotalCarbohydrate { get; set; }
-        [BsonElement("dietaryFiber")] private double DietaryFiber { get; set; }
-        [BsonElement("totalSugars")] private double TotalSugars { get; set; }
-        [BsonElement("addedSugars")] private double AddedSugars { get; set; }
-        [BsonElement("protein")] private double Protein { get; set; }
-        [BsonElement("vitaminD")] private double VitaminD { get; set; }
-        [BsonElement("calcium")] private double Calcium { get; set; }
-        [BsonElement("iron")] private double Iron { get; set; }
-        [BsonElement("potassium")] private double Potassium { get; set; }
-        [BsonElement("servingSize")] private int ServingSize { get; set; }
+        [BsonElement("calories")] public int Calories { get; set; }
+        [BsonElement("totalFat")] public double TotalFat { get; set; }
+        [BsonElement("saturatedFat")] public double SaturatedFat { get; set; }
+        [BsonElement("transFat")] public double TransFat { get; set; }
+        [BsonElement("cholesterol")] public double Cholesterol { get; set; }
+        [BsonElement("sodium")] public double Sodium { get; set; }
+        [BsonElement("totalCarbohydrate")] public int TotalCarbohydrate { get; set; }
+        [BsonElement("dietaryFiber")] public double DietaryFiber { get; set; }
+        [BsonElement("totalSugars")] public double TotalSugars { get; set; }
+        [BsonElement("addedSugars")] public double AddedSugars { get; set; }
+        [BsonElement("protein")] public double Protein { get; set; }
+        [BsonElement("vitaminD")] public double VitaminD { get; set; }
+        [BsonElement("calcium")] public double Calcium { get; set; }
+        [BsonElement("iron")] public double Iron { get; set; }
+        [BsonElement("potassium")] public double Potassium { get; set; }
+        [BsonElement("servingSize")] public int ServingSize { get; set; }
+
+        public Nutrition()
+        {
+            //Calories = 0;
+            //TotalFat = 0;
+            //SaturatedFat = 0;
+            //TransFat = 0;
+            //Cholesterol = 0;
+            //Sodium = 0;
+            //TotalCarbohydrate = 0;
+            //DietaryFiber = 0;
+            //TotalSugars = 0;
+            //AddedSugars = 0;
+            //Protein = 0;
+            //VitaminD = 0;
+            //Calcium = 0;
+            //Iron = 0;
+            //Potassium = 0;
+            // ServingSize = 0;
+        }
 
         public Nutrition(Nutrition nutrition)
         {
@@ -86,7 +106,7 @@ namespace Fridgr.Models.Database
         public override string ToString()
         {
             return "Calories: " + Calories + "\n" + 
-                   "TotalFat: " + TotalFat + "g\n" +
+                   "Total Fat: " + TotalFat + "g\n" +
                    "Saturated Fat: " + SaturatedFat + "g\n" +
                    "Trans Fat: " + TransFat + "g\n" +
                    "Cholesterol: " + Cholesterol + "mg\n" +

@@ -28,7 +28,7 @@ namespace Fridgr.Views
         {
             if (CheckLogin(entry_email.Text, entry_pw.Text))
             {
-                await Navigation.PushAsync(new MainPage());
+                await Navigation.PushAsync(new FoodItemsPage());
             } else
             {
                 await DisplayAlert("Login Error", "Invalid email or password", "Retry");

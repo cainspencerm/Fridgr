@@ -15,8 +15,8 @@ namespace Fridgr.Views
         {
             InitializeComponent();
             
-            var item = FoodItem.FindFoodItem("Bisquick", "Bisquick Pancakes");
-            BindingContext = viewModel = new FoodItemDetailViewModel(item);
+            //var item = FoodItem.FindFoodItem("Bisquick", "Bisquick Pancakes");
+            BindingContext = viewModel = new FoodItemDetailViewModel();
             
             Init();
         }
@@ -26,14 +26,28 @@ namespace Fridgr.Views
             InitializeComponent();
 
             BindingContext = viewModel = new FoodItemDetailViewModel(foodItem);
+
+            Init();
+        }
+
+        public FoodItemDetailPage(FoodItemDetailViewModel model)
+        {
+            InitializeComponent();
+
+            BindingContext = viewModel = model;
+
+            Init();
         }
 
         private void Init()
         {
             BackgroundColor = Constants.background;
 
+            if (viewModel.FoodItem == null) return;
+            
             FoodItemTitle.Text = viewModel.FoodItem.BrandName + " " + viewModel.FoodItem.FoodName;
             NutritionFacts.Text = viewModel.FoodItem.Nutrition.ToString();
+
         }
     }
 }

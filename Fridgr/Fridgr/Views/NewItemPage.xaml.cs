@@ -31,6 +31,8 @@ namespace Fridgr.Views
         async void Save_Clicked(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, "AddItem", Item);
+            
+            // Unsure what the following line does but the app works without it so...
             await Navigation.PopModalAsync();
         }
 

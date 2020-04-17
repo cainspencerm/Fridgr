@@ -26,11 +26,11 @@ namespace Fridgr.ViewModels
             {
                 var newItem = item as Item;
                 Items.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
+                //await DataStore.AddItemAsync(newItem);
             });
         }
 
-        async Task ExecuteLoadItemsCommand()
+        private async Task ExecuteLoadItemsCommand()
         {
             if (IsBusy)
                 return;
@@ -40,7 +40,7 @@ namespace Fridgr.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                var items = await DataStore.GetItemsAsync(0, 0,true);
                 foreach (var item in items)
                 {
                     Items.Add(item);
