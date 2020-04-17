@@ -52,7 +52,7 @@ namespace Fridgr.Services
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Item>> GetItemsAsync(int increment = 20, int reloads = 0, bool forceRefresh = false)
         {
             return await Task.FromResult(items);
         }
