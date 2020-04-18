@@ -30,6 +30,15 @@ namespace Fridgr.Models.Database
 
         }
 
+        public FoodItem(ObjectId id)
+        {
+            var item = App.FoodItemCollection.Find(i => i.Id.Equals(id)).Limit(1).FirstOrDefaultAsync().Result;
+            this.Id = item.Id;
+            this.BrandName = item.BrandName;
+            this.FoodName = item.FoodName;
+            this.Nutrition = new Nutrition(item.Nutrition);
+        }
+
         public FoodItem()
         {
             this.Id = ObjectId.Empty;

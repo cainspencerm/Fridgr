@@ -39,6 +39,14 @@ namespace Fridgr.Views
             Init();
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            Navigation.PopAsync();
+            Navigation.PopAsync();
+            Navigation.PushAsync(new MyFridgePage());
+            return true;
+        }
+
         private void Init()
         {
             BackgroundColor = Constants.background;

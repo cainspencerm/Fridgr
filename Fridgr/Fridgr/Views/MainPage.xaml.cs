@@ -13,6 +13,8 @@ namespace Fridgr.Views
         public MainPage()
         {
             InitializeComponent();
+            
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }
