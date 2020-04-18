@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout x:Name="StackLayout">
             <ListView x:Name="ItemsListView" VerticalOptions="FillAndExpand" HasUnevenRows="true" RefreshCommand="{Binding LoadItemsCommand}" IsPullToRefreshEnabled="true" IsRefreshing="{Binding IsBusy, Mode=OneWay}" CachingStrategy="RecycleElement" ItemSelected="OnItemSelected">
-                
+                <ListView.ItemsSource ></ListView.ItemsSource>
             </ListView>
             <Label Text="Hello, world!"
                    VerticalOptions="CenterAndExpand"

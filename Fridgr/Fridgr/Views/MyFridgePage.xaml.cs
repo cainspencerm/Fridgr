@@ -4,7 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Fridgr.Models;
 using Fridgr.Models.Database;
+using Fridgr.ViewModels;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,13 +17,13 @@ namespace Fridgr.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MyFridgePage : ContentPage
     {
-        private ObservableCollection<string> items;
+        private ObservableCollection<Food> foods;
         
         public MyFridgePage()
         {
             InitializeComponent();
             
-            items = new ObservableCollection<string>();
+            foods = new ObservableCollection<Food>();
             var users = App.UserCollection.Find(u => u.email == "test@case.com").ToListAsync().Result;
             var user = users.Count == 1 ? users.ElementAt(0) : null;
 
@@ -28,19 +31,26 @@ namespace Fridgr.Views
             {
                 foreach (var food in user.foods)
                 {
-                    var id = food.FoodItem;
-                    FoodItem foodItem = new FoodItem("fake", "fake");
-                    items.Add(foodItem?.FoodName);
+                    food.FoodItem = new FoodItem(food.FoodItemId);
+                    foods.Add(food);
                 }
             }
             
-            ItemsListView.ItemsSource = items;
+            ItemsListView.ItemsSource = foods;
         }
 
-
-        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e.SelectedItem != null)
+            {
+                FoodItem foodItem = new FoodItem(foods[e.SelectedItemIndex].FoodItemId);
+                await Navigation.PushAsync(new FoodItemDetailPage(new FoodItemDetailViewModel(foodItem))); 
+                ((ListView) sender).SelectedItem = null;
+            } 
+            else 
+            {
+                Console.WriteLine("Why is this getting called again?");
+            }
         }
     }
 }
