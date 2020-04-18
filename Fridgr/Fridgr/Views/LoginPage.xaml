@@ -19,10 +19,11 @@
                 </OnIdiom>
             </StackLayout.Padding>
 
-            <Entry x:Name="entry_email" Placeholder="Email" PlaceholderColor="LightGray" />
-            <Entry x:Name="entry_pw" Placeholder="Password" PlaceholderColor="LightGray" />
+            <Entry x:Name="entry_email" Placeholder="Email" PlaceholderColor="LightGray" Keyboard="Email" />
+            <Entry x:Name="entry_pw" Placeholder="Password" PlaceholderColor="LightGray" Keyboard="Plain" />
             <Button x:Name="btn_login" Text="Log In" Clicked="loginProdecure" />
             <Button x:Name="btn_register" Text="Register" Clicked="registerProcedure" />
+            <Button x:Name="developer_login" Text="Developer" Clicked="DeveloperLogin" />
 
         </StackLayout>
     </StackLayout>
