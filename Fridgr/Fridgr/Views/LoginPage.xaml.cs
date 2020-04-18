@@ -24,6 +24,11 @@ namespace Fridgr.Views
             entry_pw.Completed += (s, e) => loginProdecure(s, e);
         }
 
+        async void DeveloperLogin(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MainPage());
+        }
+
         async void loginProdecure(object sender, EventArgs e)
         {
             if (CheckLogin(entry_email.Text, entry_pw.Text))
