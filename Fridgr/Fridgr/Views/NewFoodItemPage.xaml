@@ -12,37 +12,37 @@
                 <Label Text="Food Name" FontSize="Medium" />
                 <Entry Text="{Binding FoodItem.FoodName}" Placeholder="" FontSize="Small" />
                 <Label Text="Calories" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.Calories}" Placeholder="" FontSize="Small" />
+                <Entry x:Name="Calories" Placeholder="" FontSize="Small" />
                 <Label Text="Total Fat" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.TotalFat}" Placeholder="in grams" FontSize="Small" />
+                <Entry x:Name="TotalFat" Placeholder="in grams" FontSize="Small" />
                 <Label Text="Saturated Fat" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.SaturatedFat}" Placeholder="in grams" FontSize="Small" />
+                <Entry x:Name="SaturatedFat" Placeholder="in grams" FontSize="Small" />
                 <Label Text="Trans Fat" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.TransFat}" Placeholder="in grams" FontSize="Small" />
+                <Entry x:Name="TransFat" Placeholder="in grams" FontSize="Small" />
                 <Label Text="Cholesterol" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.Cholesterol}" Placeholder="in milligrams" FontSize="Small" />
+                <Entry x:Name="Cholesterol" Placeholder="in milligrams" FontSize="Small" />
                 <Label Text="Sodium" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.Sodium}" Placeholder="in milligrams" FontSize="Small" />
+                <Entry x:Name="Sodium" Placeholder="in milligrams" FontSize="Small" />
                 <Label Text="Total Carbohydrate" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.TotalCarbohydrate}" Placeholder="in grams" FontSize="Small" />
+                <Entry x:Name="TotalCarbohydrate" Placeholder="in grams" FontSize="Small" />
                 <Label Text="Dietary Fiber" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.DietaryFiber}" Placeholder="in grams" FontSize="Small" />
+                <Entry x:Name="DietaryFiber" Placeholder="in grams" FontSize="Small" />
                 <Label Text="Total Sugars" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.TotalSugars}" Placeholder="in grams" FontSize="Small" />
+                <Entry x:Name="TotalSugars" Placeholder="in grams" FontSize="Small" />
                 <Label Text="Added Sugars" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.AddedSugars}" Placeholder="in grams" FontSize="Small" />
+                <Entry x:Name="AddedSugars" Placeholder="in grams" FontSize="Small" />
                 <Label Text="Protein" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.Protein}" Placeholder="in grams" FontSize="Small" />
+                <Entry x:Name="Protein" Placeholder="in grams" FontSize="Small" />
                 <Label Text="Vitamin D" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.VitaminD}" Placeholder="in micrograms" FontSize="Small" />
+                <Entry x:Name="VitaminD" Placeholder="in micrograms" FontSize="Small" />
                 <Label Text="Calcium" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.Calcium}" Placeholder="in milligrams" FontSize="Small" />
+                <Entry x:Name="Calcium" Placeholder="in milligrams" FontSize="Small" />
                 <Label Text="Iron" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.Iron}" Placeholder="in milligrams" FontSize="Small" />
+                <Entry x:Name="Iron" Placeholder="in milligrams" FontSize="Small" />
                 <Label Text="Potassium" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.Potassium}" Placeholder="in micrograms" FontSize="Small" />
+                <Entry x:Name="Potassium" Placeholder="in micrograms" FontSize="Small" />
                 <Label Text="Serving Size" FontSize="Medium" />
-                <Entry Text="{Binding FoodItem.Nutrition.ServingSize}" Placeholder="in grams" FontSize="Small" />
+                <Entry x:Name="ServingSize" Placeholder="in grams" FontSize="Small" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
