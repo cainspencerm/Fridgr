@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Fridgr.Views.NewFoodItemPage" Title="New Item">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+        <ToolbarItem Text="Save" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="20" Padding="15">
+                <Label Text="Brand Name" FontSize="Medium" />
+                <Entry Text="{Binding FoodItem.BrandName}" Placeholder="" FontSize="Small" />
+                <Label Text="Food Name" FontSize="Medium" />
+                <Entry Text="{Binding FoodItem.FoodName}" Placeholder="" FontSize="Small" />
+                <Label Text="Calories" FontSize="Medium" />
+                <Entry x:Name="Calories" Placeholder="" FontSize="Small" />
+                <Label Text="Total Fat" FontSize="Medium" />
+                <Entry x:Name="TotalFat" Placeholder="in grams" FontSize="Small" />
+                <Label Text="Saturated Fat" FontSize="Medium" />
+                <Entry x:Name="SaturatedFat" Placeholder="in grams" FontSize="Small" />
+                <Label Text="Trans Fat" FontSize="Medium" />
+                <Entry x:Name="TransFat" Placeholder="in grams" FontSize="Small" />
+                <Label Text="Cholesterol" FontSize="Medium" />
+                <Entry x:Name="Cholesterol" Placeholder="in milligrams" FontSize="Small" />
+                <Label Text="Sodium" FontSize="Medium" />
+                <Entry x:Name="Sodium" Placeholder="in milligrams" FontSize="Small" />
+                <Label Text="Total Carbohydrate" FontSize="Medium" />
+                <Entry x:Name="TotalCarbohydrate" Placeholder="in grams" FontSize="Small" />
+                <Label Text="Dietary Fiber" FontSize="Medium" />
+                <Entry x:Name="DietaryFiber" Placeholder="in grams" FontSize="Small" />
+                <Label Text="Total Sugars" FontSize="Medium" />
+                <Entry x:Name="TotalSugars" Placeholder="in grams" FontSize="Small" />
+                <Label Text="Added Sugars" FontSize="Medium" />
+                <Entry x:Name="AddedSugars" Placeholder="in grams" FontSize="Small" />
+                <Label Text="Protein" FontSize="Medium" />
+                <Entry x:Name="Protein" Placeholder="in grams" FontSize="Small" />
+                <Label Text="Vitamin D" FontSize="Medium" />
+                <Entry x:Name="VitaminD" Placeholder="in micrograms" FontSize="Small" />
+                <Label Text="Calcium" FontSize="Medium" />
+                <Entry x:Name="Calcium" Placeholder="in milligrams" FontSize="Small" />
+                <Label Text="Iron" FontSize="Medium" />
+                <Entry x:Name="Iron" Placeholder="in milligrams" FontSize="Small" />
+                <Label Text="Potassium" FontSize="Medium" />
+                <Entry x:Name="Potassium" Placeholder="in micrograms" FontSize="Small" />
+                <Label Text="Serving Size" FontSize="Medium" />
+                <Entry x:Name="ServingSize" Placeholder="in grams" FontSize="Small" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
