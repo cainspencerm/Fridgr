@@ -6,8 +6,9 @@
              Title="Food Details">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="FoodItemTitle" HorizontalOptions="CenterAndExpand" TextColor="White"/>
-            <Label x:Name="NutritionFacts" HorizontalOptions="StartAndExpand" TextColor="White"/>
+            <Label x:Name="FoodItemTitle" HorizontalOptions="CenterAndExpand" TextColor="White" />
+            <Label x:Name="NutritionFacts" HorizontalOptions="StartAndExpand" TextColor="White" />
+            <Label x:Name="FoodType" HorizontalOptions="StartAndExpand" TextColor="White" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,3 +1,4 @@
+using System;
 using Fridgr.Models;
 using Fridgr.Models.Database;
 using Fridgr.ViewModels;
@@ -9,15 +10,15 @@ namespace Fridgr.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FoodItemDetailPage : ContentPage
     {
-        FoodItemDetailViewModel viewModel;
-        
+        private readonly FoodItemDetailViewModel viewModel;
+
         public FoodItemDetailPage()
         {
             InitializeComponent();
-            
+
             //var item = FoodItem.FindFoodItem("Bisquick", "Bisquick Pancakes");
             BindingContext = viewModel = new FoodItemDetailViewModel();
-            
+
             Init();
         }
 
@@ -52,10 +53,10 @@ namespace Fridgr.Views
             BackgroundColor = Constants.background;
 
             if (viewModel.FoodItem == null) return;
-            
+
             FoodItemTitle.Text = viewModel.FoodItem.BrandName + " " + viewModel.FoodItem.FoodName;
             NutritionFacts.Text = viewModel.FoodItem.Nutrition.ToString();
-
+            FoodType.Text = "Food type: " + Enum.GetName(typeof(FoodType), viewModel.FoodItem.FoodType);
         }
     }
 }
