@@ -26,6 +26,7 @@ namespace Fridgr.Views
 
         async void DeveloperLogin(object sender, EventArgs e)
         {
+            App.currentUser = App.UserCollection.Find(u => u.email == "test@case.com").FirstOrDefaultAsync().Result;
             await Navigation.PushAsync(new MainPage());
         }
 
@@ -33,6 +34,7 @@ namespace Fridgr.Views
         {
             if (CheckLogin(entry_email.Text, entry_pw.Text))
             {
+                App.currentUser = App.UserCollection.Find(u => u.email == entry_email.Text).FirstOrDefaultAsync().Result;
                 await Navigation.PushAsync(new MainPage());
             } else
             {

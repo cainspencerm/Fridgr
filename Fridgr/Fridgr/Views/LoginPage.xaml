@@ -4,13 +4,7 @@
              x:Class="Fridgr.Views.LoginPage">
     <StackLayout x:Name="MasterLayout">
 
-        <StackLayout x:Name="TitleLayout">
-            <Label x:Name="label_title" Text="Fridgr" />
-        </StackLayout>
-
-        <StackLayout x:Name="DescLayout">
-            <Label x:Name="label_desc" Text="Log In or Register" />
-        </StackLayout>
+        
 
         <StackLayout x:Name="LoginEntriesStack" VerticalOptions="StartAndExpand">
             <StackLayout.Padding>

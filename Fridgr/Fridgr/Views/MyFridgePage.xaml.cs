@@ -24,8 +24,9 @@ namespace Fridgr.Views
             InitializeComponent();
             
             foods = new ObservableCollection<Food>();
-            var users = App.UserCollection.Find(u => u.email == "test@case.com").ToListAsync().Result;
-            var user = users.Count == 1 ? users.ElementAt(0) : null;
+            //var users = App.UserCollection.Find(u => u.email == "test@case.com").ToListAsync().Result;
+            //var user = users.Count == 1 ? users.ElementAt(0) : null;
+            var user = App.currentUser;
 
             if (user?.foods != null)
             {

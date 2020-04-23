@@ -25,5 +25,11 @@ namespace Fridgr.Models.Database
             this.email = email;
             this.password = password;
         }
+
+        public User(string email, string password)
+        {
+            this.email = email;
+            this.password = password;
+        }
     }
 }

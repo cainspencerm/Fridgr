@@ -15,7 +15,9 @@ namespace Fridgr
     {
         public static IMongoCollection<User> UserCollection;
         public static IMongoCollection<FoodItem> FoodItemCollection;
-        
+
+        public static User currentUser;
+
         public App()
         {
             InitializeComponent();
