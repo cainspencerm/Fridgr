@@ -23,6 +23,11 @@ namespace Fridgr.Views
             entry_email.BackgroundColor = Constants.secondaryBackground;
             entry_pw.BackgroundColor = Constants.secondaryBackground;
 
+            entry_fname.TextColor = Constants.maintext;
+            entry_lname.TextColor = Constants.maintext;
+            entry_email.TextColor = Constants.maintext;
+            entry_pw.TextColor = Constants.maintext;
+
             entry_fname.Completed += (s, e) => entry_lname.Focus();
             entry_lname.Completed += (s, e) => entry_email.Focus();
             entry_email.Completed += (s, e) => entry_pw.Focus();
