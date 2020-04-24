@@ -63,8 +63,8 @@ namespace Fridgr.Views
         {
             BackgroundColor = Constants.background;
             
-            AddFoodPurchaseDate.BackgroundColor = Constants.secondaryBackground;
-            AddFoodExpirationDate.BackgroundColor = Constants.secondaryBackground;
+            //AddFoodPurchaseDate.BackgroundColor = Constants.secondaryBackground;
+            //AddFoodExpirationDate.BackgroundColor = Constants.secondaryBackground;
             AddFoodServings.BackgroundColor = Constants.secondaryBackground;
 
             if (viewModel.FoodItem == null) return;
@@ -76,8 +76,10 @@ namespace Fridgr.Views
 
         public void OnAddButtonPressed(object sender, EventArgs e)
         {
-            AddFoodPurchaseDate.IsVisible = !AddFoodPurchaseDate.IsVisible;
-            AddFoodExpirationDate.IsVisible = !AddFoodExpirationDate.IsVisible;
+            //AddFoodPurchaseDate.IsVisible = !AddFoodPurchaseDate.IsVisible;
+            //AddFoodExpirationDate.IsVisible = !AddFoodExpirationDate.IsVisible;
+            purchaseDatePicker.IsVisible = !purchaseDatePicker.IsVisible;
+            expireDatePicker.IsVisible = !expireDatePicker.IsVisible;
             AddFoodServings.IsVisible = !AddFoodServings.IsVisible;
             AddFoodConfirmButton.IsVisible = !AddFoodConfirmButton.IsVisible;
         }
@@ -87,7 +89,7 @@ namespace Fridgr.Views
             var food = new Food(viewModel.FoodItem);
             try
             {
-                food.PurchaseDate = DateTime.Parse(AddFoodPurchaseDate.Text);
+                food.PurchaseDate = purchaseDatePicker.Date;
             }
             catch (Exception)
             {
@@ -97,7 +99,8 @@ namespace Fridgr.Views
             
             try
             {
-                food.ExpirationDate = DateTime.Parse(AddFoodExpirationDate.Text);
+                //food.ExpirationDate = DateTime.Parse(AddFoodExpirationDate.Text);
+                food.ExpirationDate = expireDatePicker.Date;
             }
             catch (Exception)
             {
@@ -119,6 +122,12 @@ namespace Fridgr.Views
             
             await User.DataStore.UpdateItemAsync(App.currentUser);
             await Navigation.PopToRootAsync();
+        }
+
+
+        void OnDateSelected(System.Object sender, Xamarin.Forms.DateChangedEventArgs e)
+        {
+            
         }
     }
 }

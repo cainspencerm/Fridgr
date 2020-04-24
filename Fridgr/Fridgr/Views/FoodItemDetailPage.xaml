@@ -11,8 +11,13 @@
             <Label x:Name="FoodType" HorizontalOptions="StartAndExpand" TextColor="White" />
 
             <Button x:Name="AddButton" Text="Add to My Fridge" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False" Pressed="OnAddButtonPressed"/>
-            <Entry x:Name="AddFoodPurchaseDate" TextColor="White" IsVisible="False" HorizontalOptions="Center" WidthRequest="300" Placeholder="Purchased On"/>
-            <Entry x:Name="AddFoodExpirationDate" TextColor="White" IsVisible="False" HorizontalOptions="Center" WidthRequest="300" Placeholder="Expires On"/>
+
+            <Label Text="Purchase Date:" TextColor="WhiteSmoke" IsVisible="False" />
+            <DatePicker x:Name="purchaseDatePicker" Format="D" WidthRequest="300" DateSelected="OnDateSelected" IsVisible="False"/>
+
+            <Label Text="Expiration Date:" TextColor="WhiteSmoke" IsVisible="False"/>
+            <DatePicker x:Name="expireDatePicker" MinimumDate="{Binding Source={x:Reference purchaseDatePicker}, Path=Date}" Format="D" WidthRequest="300" DateSelected="OnDateSelected" IsVisible="False"/>
+
             <Entry x:Name="AddFoodServings" TextColor="White" IsVisible="False" HorizontalOptions="Center" WidthRequest="300" Placeholder="Servings in grams"/>
             <Button x:Name="AddFoodConfirmButton" Text="Add Food" HorizontalOptions="Center" IsVisible="False" Pressed="OnConfirmButtonPressed"/>
             <!--<Button x:Name="btn_deleteFridgeItem" Text="Delete From Fridge" Clicked="DeleteFridgeItem" />-->
