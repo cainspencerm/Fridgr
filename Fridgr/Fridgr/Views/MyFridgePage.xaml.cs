@@ -1,14 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Fridgr.Models;
 using Fridgr.Models.Database;
 using Fridgr.ViewModels;
-using MongoDB.Bson;
-using MongoDB.Driver;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,41 +10,44 @@ namespace Fridgr.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MyFridgePage : ContentPage
     {
-        private ObservableCollection<Food> foods;
+        private FoodItemsViewModel viewModel;
         
         public MyFridgePage()
         {
             InitializeComponent();
-            
-            foods = new ObservableCollection<Food>();
+
+            BindingContext = viewModel = new FoodItemsViewModel(false);
+
+            viewModel.FoodItems = new ObservableCollection<FoodItem>();
             //var users = App.UserCollection.Find(u => u.email == "test@case.com").ToListAsync().Result;
             //var user = users.Count == 1 ? users.ElementAt(0) : null;
             var user = App.currentUser;
 
-            if (user?.foods != null)
+            if (user?.FoodIds != null)
             {
-                foreach (var food in user.foods)
+                foreach (var food in user.Foods)
                 {
                     food.FoodItem = new FoodItem(food.FoodItemId);
-                    foods.Add(food);
+                    viewModel.FoodItems.Add(food.FoodItem);
                 }
             }
-            
-            ItemsListView.ItemsSource = foods;
+
+            ItemsListView.ItemsSource = viewModel.FoodItems;
         }
 
         private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
             {
-                FoodItem foodItem = new FoodItem(foods[e.SelectedItemIndex].FoodItemId);
+                FoodItem foodItem = new FoodItem(viewModel.FoodItems[e.SelectedItemIndex].Id);
                 await Navigation.PushAsync(new FoodItemDetailPage(new FoodItemDetailViewModel(foodItem))); 
                 ((ListView) sender).SelectedItem = null;
-            } 
-            else 
-            {
-                Console.WriteLine("Why is this getting called again?");
             }
+        }
+        
+        private async void AddItem_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new FoodItemsPage());
         }
     }
 }

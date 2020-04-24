@@ -1,5 +1,6 @@
 ﻿using System;
 using Fridgr.Models;
+using Fridgr.Models.Database;
 using Xamarin.Forms;
 
 namespace Fridgr.Views
@@ -11,11 +12,13 @@ namespace Fridgr.Views
             InitializeComponent();
 
             this.BackgroundColor = Constants.background;
+            
+            OldPassword.BackgroundColor = Constants.secondaryBackground;
+            NewPassword.BackgroundColor = Constants.secondaryBackground;
+            ConfirmPassword.BackgroundColor = Constants.secondaryBackground;
 
-            NavigationPage.SetHasNavigationBar(this, false);
-
-            NameLabel.Text = App.currentUser.firstName + "\n" + App.currentUser.lastName;
-            EmailLabel.Text = App.currentUser.email;
+            NameLabel.Text = App.currentUser.FirstName + "\n" + App.currentUser.LastName;
+            EmailLabel.Text = App.currentUser.Email;
 
             OldPassword.WidthRequest = 300;
             NewPassword.WidthRequest = 300;
@@ -25,7 +28,9 @@ namespace Fridgr.Views
         async void logoutProcedure(object sender, EventArgs e)
         {
             App.currentUser = null;
-            await Navigation.PushAsync(new LoginPage());
+            await App.NavPage.Navigation.PopAsync();
+            App.NavPage = null;
+            //throw new NotImplementedException();
         }
 
         private void ResetPasswordButton_OnPressed(object sender, EventArgs e)
@@ -38,7 +43,7 @@ namespace Fridgr.Views
 
         private async void ChangePasswordButton_OnPressed(object sender, EventArgs e)
         {
-            if (App.currentUser.password != OldPassword.Text)
+            if (App.currentUser.Password != OldPassword.Text)
             {
                 await DisplayAlert("Invalid", "Current password does not match.", "Retry");
                 return;
@@ -51,6 +56,16 @@ namespace Fridgr.Views
             }
             
             // TODO Update user password.
+            App.currentUser.Password = ConfirmPassword.Text;
+            await User.DataStore.UpdateItemAsync(App.currentUser);
+
+            OldPassword.Text = "";
+            NewPassword.Text = "";
+            ConfirmPassword.Text = "";
+
+            ResetPasswordButton_OnPressed(null, null);
+            
+            await DisplayAlert("Password Changed", null, "Retry");
         }
     }
 }

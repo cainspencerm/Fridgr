@@ -1,17 +1,19 @@
-﻿using System;
-using MongoDB.Driver;
-using MongoDB.Bson;
+﻿using MongoDB.Driver;
 
 namespace Fridgr.Services
 {
     public class MongoHelper<T> where T : class
     {
-        public IMongoCollection<T> Collection { get; private set; }
-        public MongoHelper()
+        public MongoHelper(string collectionName = null)
         {
-            var client = new MongoClient("mongodb + srv://cainspencerm:<password>@fridgr-bs8ph.gcp.mongodb.net/test?retryWrites=true&w=majority");
+            var client =
+                new MongoClient(
+                    "mongodb+srv://user:BzypQCaeTwbudvWt@fridgr-bs8ph.gcp.mongodb.net/test?retryWrites=true&w=majority");
             var db = client.GetDatabase("Fridgr");
-            Collection = db.GetCollection<T>("user");
+
+            Collection = !collectionName.Equals(string.Empty) ? db.GetCollection<T>(collectionName) : null;
         }
+
+        public IMongoCollection<T> Collection { get; set; }
     }
 }

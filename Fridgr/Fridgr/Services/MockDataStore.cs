@@ -6,7 +6,7 @@ using Fridgr.Models;
 
 namespace Fridgr.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore// : IDataStore<Item>
     {
         readonly List<Item> items;
 

@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Fridgr.Views.LoginPage">
+             x:Class="Fridgr.Views.LoginPage"
+             NavigationPage.HasNavigationBar="False">
     <StackLayout x:Name="MasterLayout">
 
-        
+        <Label Text="Fridgr" TextColor="White" FontSize="50" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
 
         <StackLayout x:Name="LoginEntriesStack" VerticalOptions="StartAndExpand">
             <StackLayout.Padding>
@@ -13,10 +14,12 @@
                 </OnIdiom>
             </StackLayout.Padding>
 
-            <Entry x:Name="entry_email" Placeholder="Email" PlaceholderColor="LightGray" Keyboard="Email" />
-            <Entry x:Name="entry_pw" Placeholder="Password" PlaceholderColor="LightGray" Keyboard="Plain" />
-            <Button x:Name="btn_login" Text="Log In" Clicked="loginProdecure" />
-            <Button x:Name="btn_register" Text="Register" Clicked="registerProcedure" />
+            <Entry x:Name="entry_email" TextColor="White" Placeholder="Email" PlaceholderColor="LightGray" Keyboard="Email" />
+            <Entry x:Name="entry_pw" IsPassword="True" TextColor="White" Placeholder="Password" PlaceholderColor="LightGray" Keyboard="Plain" />
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="100">
+                <Button x:Name="btn_login" Text="Log In" Clicked="loginProdecure" HorizontalOptions="Fill"/>
+                <Button x:Name="btn_register" Text="Register" Clicked="registerProcedure" HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
             <Button x:Name="developer_login" Text="Developer" Clicked="DeveloperLogin" />
 
         </StackLayout>

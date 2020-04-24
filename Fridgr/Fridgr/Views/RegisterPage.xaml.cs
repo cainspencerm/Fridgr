@@ -1,8 +1,8 @@
 ﻿using System;
 using Fridgr.Models;
 using Fridgr.Models.Database;
-using Xamarin.Forms;
 using MongoDB.Driver;
+using Xamarin.Forms;
 
 namespace Fridgr.Views
 {
@@ -18,6 +18,10 @@ namespace Fridgr.Views
         {
             BackgroundColor = Constants.background;
 
+            entry_fname.BackgroundColor = Constants.secondaryBackground;
+            entry_lname.BackgroundColor = Constants.secondaryBackground;
+            entry_email.BackgroundColor = Constants.secondaryBackground;
+            entry_pw.BackgroundColor = Constants.secondaryBackground;
 
             entry_fname.Completed += (s, e) => entry_lname.Focus();
             entry_lname.Completed += (s, e) => entry_email.Focus();
@@ -50,7 +54,7 @@ namespace Fridgr.Views
                 {
                     if (pw.Length >= 6)
                     {
-                        var user = App.UserCollection.Find(u => u.email == emailaddr).Limit(1).ToListAsync().Result;
+                        var user = App.UserCollection.Find(u => u.Email == emailaddr).Limit(1).ToListAsync().Result;
                         if (user.Count == 0)
                         {
                             return true;

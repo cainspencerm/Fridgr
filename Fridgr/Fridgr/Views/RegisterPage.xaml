@@ -21,8 +21,8 @@
 
             <Entry x:Name="entry_fname" Placeholder="First Name" PlaceholderColor="LightGray" />
             <Entry x:Name="entry_lname" Placeholder="Last Name" PlaceholderColor="LightGray" />
-            <Entry x:Name="entry_email" Placeholder="Email" PlaceholderColor="LightGray" />
-            <Entry x:Name="entry_pw" Placeholder="Password" PlaceholderColor="LightGray" />
+            <Entry x:Name="entry_email" Placeholder="Email" Keyboard="Email" PlaceholderColor="LightGray" />
+            <Entry x:Name="entry_pw" Placeholder="Password" Keyboard="Plain" IsPassword="True" PlaceholderColor="LightGray" />
             <Button x:Name="btn_register" Text="Register" Clicked="CreateNewAcct" />
 
         </StackLayout>

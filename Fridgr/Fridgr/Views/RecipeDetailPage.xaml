@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fridgr.Views.RecipeDetailPage"
+             Title="Food Details">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="Title" HorizontalOptions="CenterAndExpand" TextColor="White" />
+            <Label x:Name="Author" HorizontalOptions="StartAndExpand" TextColor="White" />
+            <Label x:Name="Rating" HorizontalOptions="StartAndExpand" TextColor="White" />
+            <Label x:Name="Date" HorizontalOptions="StartAndExpand" TextColor="White" />
+            <Label x:Name="Description" HorizontalOptions="StartAndExpand" TextColor="White" />
+            <Label x:Name="Ingredients" HorizontalOptions="StartAndExpand" TextColor="White" />
+            <Label x:Name="Directions" HorizontalOptions="StartAndExpand" TextColor="White" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

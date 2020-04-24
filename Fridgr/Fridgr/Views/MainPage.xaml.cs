@@ -1,7 +1,6 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using Fridgr.Models;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Fridgr.Views
 {
@@ -10,11 +9,14 @@ namespace Fridgr.Views
     [DesignTimeVisible(false)]
     public partial class MainPage : TabbedPage
     {
+        private Color _barColor;
         public MainPage()
         {
             InitializeComponent();
             
             NavigationPage.SetHasNavigationBar(this, false);
+
+            BindingContext = new Constants();
         }
     }
 }

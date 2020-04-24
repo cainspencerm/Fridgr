@@ -2,7 +2,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Fridgr.Models;
 using Fridgr.Models.Database;
 using Fridgr.Services;
 using Fridgr.Views;
@@ -15,12 +14,11 @@ namespace Fridgr.ViewModels
         public ObservableCollection<FoodItem> FoodItems { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public FoodItemsViewModel()
+        public FoodItemsViewModel(bool allItems)
         {
             DataStore = new FoodItemDataStore();
-            Title = "Browse";
             FoodItems = new ObservableCollection<FoodItem>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(allItems));
 
             MessagingCenter.Subscribe<NewFoodItemPage, FoodItem>(this, "AddItem", async (obj, item) =>
             {
@@ -30,7 +28,7 @@ namespace Fridgr.ViewModels
             });
         }
 
-        private async Task ExecuteLoadItemsCommand()
+        private async Task ExecuteLoadItemsCommand(bool allItems)
         {
             if (IsBusy)
                 return;
@@ -40,7 +38,7 @@ namespace Fridgr.ViewModels
             try
             {
                 FoodItems.Clear();
-                var items = await DataStore.GetItemsAsync();
+                var items = allItems ? await DataStore.GetItemsAsync() : await DataStore.GetMyItemsAsync();
                 foreach (var item in items)
                 {
                     FoodItems.Add(item);

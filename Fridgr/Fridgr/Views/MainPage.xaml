@@ -1,7 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" xmlns:views="clr-namespace:Fridgr.Views" x:Class="Fridgr.Views.MainPage">
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            mc:Ignorable="d"
+            xmlns:views="clr-namespace:Fridgr.Views"
+            x:Class="Fridgr.Views.MainPage"
+            x:Name="TabbedPage"
+            BarBackgroundColor="#FF000000"
+            BarTextColor="Azure">
     <TabbedPage.Children>
-        <NavigationPage Title="My Fridge">
+        <NavigationPage Title="My Fridge" BarBackgroundColor="#FF000000" >
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
                     <On Platform="iOS" Value="tab_feed.png" />
@@ -11,17 +20,17 @@
                 <views:MyFridgePage />
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="Recipes">
+        <NavigationPage Title="Recipes" BarBackgroundColor="#FF000000">
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
                     <On Platform="iOS" Value="tab_feed.png" />
                 </OnPlatform>
             </NavigationPage.Icon>
             <x:Arguments>
-                <views:ItemsPage />
+                <views:RecipesPage />
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="Account">
+        <NavigationPage Title="Account" BarBackgroundColor="#FF000000">
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
                     <On Platform="iOS" Value="tab_about.png" />

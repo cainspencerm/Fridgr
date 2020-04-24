@@ -2,6 +2,7 @@ using System;
 using Fridgr.Models;
 using Fridgr.Models.Database;
 using Fridgr.ViewModels;
+using MongoDB.Bson;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -40,6 +41,16 @@ namespace Fridgr.Views
             Init();
         }
 
+        public FoodItemDetailPage(FoodItemDetailViewModel model, bool addButtonIsVisible)
+        {
+            InitializeComponent();
+
+            BindingContext = viewModel = model;
+
+            Init();
+            AddButton.IsVisible = addButtonIsVisible;
+        }
+
         protected override bool OnBackButtonPressed()
         {
             Navigation.PopAsync();
@@ -51,12 +62,63 @@ namespace Fridgr.Views
         private void Init()
         {
             BackgroundColor = Constants.background;
+            
+            AddFoodPurchaseDate.BackgroundColor = Constants.secondaryBackground;
+            AddFoodExpirationDate.BackgroundColor = Constants.secondaryBackground;
+            AddFoodServings.BackgroundColor = Constants.secondaryBackground;
 
             if (viewModel.FoodItem == null) return;
 
             FoodItemTitle.Text = viewModel.FoodItem.BrandName + " " + viewModel.FoodItem.FoodName;
             NutritionFacts.Text = viewModel.FoodItem.Nutrition.ToString();
             FoodType.Text = "Food type: " + Enum.GetName(typeof(FoodType), viewModel.FoodItem.FoodType);
+        }
+
+        public void OnAddButtonPressed(object sender, EventArgs e)
+        {
+            AddFoodPurchaseDate.IsVisible = !AddFoodPurchaseDate.IsVisible;
+            AddFoodExpirationDate.IsVisible = !AddFoodExpirationDate.IsVisible;
+            AddFoodServings.IsVisible = !AddFoodServings.IsVisible;
+            AddFoodConfirmButton.IsVisible = !AddFoodConfirmButton.IsVisible;
+        }
+        
+        public async void OnConfirmButtonPressed(object sender, EventArgs e)
+        {
+            var food = new Food(viewModel.FoodItem);
+            try
+            {
+                food.PurchaseDate = DateTime.Parse(AddFoodPurchaseDate.Text);
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Invalid Date", "Could not read expiration date.", "Retry");
+                return;
+            }
+            
+            try
+            {
+                food.ExpirationDate = DateTime.Parse(AddFoodExpirationDate.Text);
+            }
+            catch (Exception)
+            {
+                await DisplayAlert("Invalid Date", "Could not read expiration date.", "Retry");
+                return;
+            }
+            
+            var foods = App.currentUser.Foods;
+            App.currentUser.Foods = new Food[foods.Length + 1];
+            for (int i = 0; i < foods.Length; i++)
+            {
+                App.currentUser.Foods[i] = foods[i];
+            }
+
+            App.currentUser.Foods[foods.Length] = food;
+            var bson = food.ToBsonDocument();
+            bson.Remove("FoodItem");
+            App.currentUser.FoodIds.Insert(App.currentUser.FoodIds.Count, bson);
+            
+            await User.DataStore.UpdateItemAsync(App.currentUser);
+            await Navigation.PopToRootAsync();
         }
     }
 }

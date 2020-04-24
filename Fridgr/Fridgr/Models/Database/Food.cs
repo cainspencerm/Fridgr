@@ -17,5 +17,22 @@ namespace Fridgr.Models.Database
         {
             return FoodItem.FoodName;
         }
+
+        public Food(BsonDocument document)
+        {
+            FoodItemId = document.GetElement("foodItem").Value.AsObjectId;
+            //FoodItem = FoodItem.DataStore.GetItemAsync(FoodItemId.ToString()).Result;
+            PurchaseDate = document.GetElement("purchaseDate").Value.ToUniversalTime();
+            ExpirationDate = document.GetElement("expirationDate").Value.ToUniversalTime();
+            Servings = document.GetElement("servings").Value.AsInt32;
+        }
+
+        public Food(FoodItem foodItem)
+        {
+            FoodItemId = foodItem.Id;
+            FoodItem = foodItem;
+            PurchaseDate = ExpirationDate = new DateTime();
+            Servings = 0;
+        }
     }
 }

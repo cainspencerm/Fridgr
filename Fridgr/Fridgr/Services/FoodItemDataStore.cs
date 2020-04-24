@@ -9,15 +9,16 @@ namespace Fridgr.Services
 {
     public class FoodItemDataStore : IDataStore<FoodItem>
     {
-        readonly List<FoodItem> FoodItems;
+        private static readonly MongoHelper<FoodItem> MongoHelper = new MongoHelper<FoodItem>("FoodItems");
+
         public async Task<bool> AddItemAsync(FoodItem item)
         {
-            if (App.FoodItemCollection.Find(i => i.Id == item.Id).ToListAsync().Result.Count > 0)
+            if (MongoHelper.Collection.Find(i => i.Id == item.Id).ToListAsync().Result.Count > 0)
                 return false;
-            
+
             try
             {
-                await App.FoodItemCollection.InsertOneAsync(item);
+                await MongoHelper.Collection.InsertOneAsync(item);
                 return true;
             }
             catch (Exception)
@@ -39,8 +40,8 @@ namespace Fridgr.Services
                 var filterDefinition = Builders<FoodItem>.Filter;
                 var filter = filterDefinition.Eq(foodItem => foodItem.Id, item.Id);
 
-                await App.FoodItemCollection.UpdateOneAsync(filter, update);
-                
+                await MongoHelper.Collection.UpdateOneAsync(filter, update);
+
                 return true;
             }
             catch (Exception)
@@ -53,7 +54,7 @@ namespace Fridgr.Services
         {
             try
             {
-                await App.FoodItemCollection.DeleteOneAsync(foodItem => foodItem.Id == new ObjectId(id));
+                await MongoHelper.Collection.DeleteOneAsync(foodItem => foodItem.Id == new ObjectId(id));
 
                 return true;
             }
@@ -67,23 +68,39 @@ namespace Fridgr.Services
         {
             try
             {
-                return await App.FoodItemCollection.Find(foodItem => foodItem.Id == new ObjectId(id))
-                    .Limit(1)
+                var item = await MongoHelper.Collection.Find(foodItem => foodItem.Id.ToString() == id)
                     .FirstOrDefaultAsync();
+                return item;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                throw new Exception("Could not get food item.");
+            }
+        }
+
+        public async Task<IEnumerable<FoodItem>> GetMyItemsAsync(bool forceRefresh = false)
+        {
+            try
+            {
+                var foodIds = new List<ObjectId>();
+                foreach (var food in App.currentUser.Foods)
+                {
+                    foodIds.Insert(foodIds.Count, food.FoodItem.Id);
+                }
+                return await MongoHelper.Collection.Find(foodItem => foodIds.Contains(foodItem.Id)).ToListAsync();
             }
             catch (Exception)
             {
-                throw new Exception("Could not get food item.");
+                throw new Exception("Could not get food items.");
             }
-            
         }
 
         public async Task<IEnumerable<FoodItem>> GetItemsAsync(int increment = 20, int reloads = 0, bool forceRefresh = false)
         {
             try
             {
-                return await App.FoodItemCollection.Find(foodItem => true).Limit(increment).Skip(increment * reloads)
-                    .ToListAsync();
+                return await MongoHelper.Collection.Find(foodItem => true).Limit(increment).Skip(increment * reloads).ToListAsync();
             }
             catch (Exception)
             {

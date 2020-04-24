@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
-using MongoDB.Driver;
 using Fridgr.Models;
+using Fridgr.Models.Database;
+using MongoDB.Driver;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,22 +21,35 @@ namespace Fridgr.Views
         {
             BackgroundColor = Constants.background;
 
+            entry_email.BackgroundColor = Constants.secondaryBackground;
+            entry_pw.BackgroundColor = Constants.secondaryBackground;
+
             entry_email.Completed += (s, e) => entry_pw.Focus();
             entry_pw.Completed += (s, e) => loginProdecure(s, e);
         }
 
         async void DeveloperLogin(object sender, EventArgs e)
         {
-            App.currentUser = App.UserCollection.Find(u => u.email == "test@case.com").FirstOrDefaultAsync().Result;
-            await Navigation.PushAsync(new MainPage());
+            var user = App.UserCollection.Find(u => u.Email == "test@case.com").FirstOrDefaultAsync().Result;
+            user.Foods = new Food[user.FoodIds.Count];
+            for (int i = 0; i < user.FoodIds.Count; i++)
+            {
+                var doc = user.FoodIds[i].AsBsonDocument;
+                user.Foods[i] = new Food(doc);
+            }
+            
+            App.currentUser = user;
+            App.NavPage = new MainPage();
+            await Navigation.PushAsync(App.NavPage);
         }
 
         async void loginProdecure(object sender, EventArgs e)
         {
             if (CheckLogin(entry_email.Text, entry_pw.Text))
             {
-                App.currentUser = App.UserCollection.Find(u => u.email == entry_email.Text).FirstOrDefaultAsync().Result;
-                await Navigation.PushAsync(new MainPage());
+                App.currentUser = User.DataStore.GetItemAsync(entry_email.Text, entry_pw.Text).Result;
+                App.NavPage = new MainPage();
+                await Navigation.PushAsync(App.NavPage);
             } else
             {
                 await DisplayAlert("Login Error", "Invalid email or password", "Retry");
@@ -52,8 +66,8 @@ namespace Fridgr.Views
         {
             if (email != null && pw != null)
             {
-                var user = App.UserCollection.Find(u => u.email == email).Limit(1).ToListAsync().Result;
-                return user.Count > 0 && user.ElementAt(0).password == pw;
+                var user = App.UserCollection.Find(u => u.Email == email).Limit(1).ToListAsync().Result;
+                return user.Count > 0 && user.ElementAt(0).Password == pw;
             }
             else return false;
         }

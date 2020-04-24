@@ -10,6 +10,11 @@
             <Label x:Name="NutritionFacts" HorizontalOptions="StartAndExpand" TextColor="White" />
             <Label x:Name="FoodType" HorizontalOptions="StartAndExpand" TextColor="White" />
 
+            <Button x:Name="AddButton" Text="Add to My Fridge" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False" Pressed="OnAddButtonPressed"/>
+            <Entry x:Name="AddFoodPurchaseDate" TextColor="White" IsVisible="False" HorizontalOptions="Center" WidthRequest="300" Placeholder="Purchased On"/>
+            <Entry x:Name="AddFoodExpirationDate" TextColor="White" IsVisible="False" HorizontalOptions="Center" WidthRequest="300" Placeholder="Expires On"/>
+            <Entry x:Name="AddFoodServings" TextColor="White" IsVisible="False" HorizontalOptions="Center" WidthRequest="300" Placeholder="Servings in grams"/>
+            <Button x:Name="AddFoodConfirmButton" Text="Add Food" HorizontalOptions="Center" IsVisible="False" Pressed="OnConfirmButtonPressed"/>
             <!--<Button x:Name="btn_deleteFridgeItem" Text="Delete From Fridge" Clicked="DeleteFridgeItem" />-->
         </StackLayout>
     </ContentPage.Content>

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Fridgr.Services;
-using Fridgr.Views;
+﻿using Fridgr.Models;
 using Fridgr.Models.Database;
-using MongoDB.Bson;
+using Fridgr.Views;
 using MongoDB.Driver;
-using Fridgr.Models;
+using Xamarin.Forms;
 
 namespace Fridgr
 {
@@ -15,13 +10,17 @@ namespace Fridgr
     {
         public static IMongoCollection<User> UserCollection;
         public static IMongoCollection<FoodItem> FoodItemCollection;
+        public static Page NavPage;
 
         public static User currentUser;
 
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new LoginPage());     // need NavigationPage to support PushAsync
+            MainPage = new NavigationPage(new LoginPage())
+            {
+                BarBackgroundColor = Constants.secondaryBackground
+            };     // need NavigationPage to support PushAsync
         }
 
         protected override void OnStart()

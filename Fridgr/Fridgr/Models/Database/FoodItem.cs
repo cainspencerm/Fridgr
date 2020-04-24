@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Fridgr.Services;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
@@ -8,6 +9,8 @@ namespace Fridgr.Models.Database
 {
     public class FoodItem
     {
+        public static readonly FoodItemDataStore DataStore = new FoodItemDataStore();
+
         public FoodItem(string brandName, string foodName)
         {
             try
@@ -60,6 +63,11 @@ namespace Fridgr.Models.Database
         {
             return App.FoodItemCollection.Find(i => i.FoodName.Equals(foodName) && i.BrandName.Equals(brandName))
                 .Limit(1).ToListAsync().Result.ElementAt(0);
+        }
+
+        public override string ToString()
+        {
+            return FoodName;
         }
     }
 }

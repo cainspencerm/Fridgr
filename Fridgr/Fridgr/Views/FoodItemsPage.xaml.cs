@@ -1,14 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Fridgr.Models;
 using Fridgr.Models.Database;
 using Fridgr.ViewModels;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Fridgr.Views
 {
@@ -23,7 +16,7 @@ namespace Fridgr.Views
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new FoodItemsViewModel();
+            BindingContext = viewModel = new FoodItemsViewModel(true);
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
@@ -32,15 +25,10 @@ namespace Fridgr.Views
             if (item == null)
                 return;
 
-            await Navigation.PushAsync(new FoodItemDetailPage(new FoodItemDetailViewModel(item)));
+            await Navigation.PushAsync(new FoodItemDetailPage(new FoodItemDetailViewModel(item), true));
 
             // Manually deselect item.
             FoodItemsListView.SelectedItem = null;
-        }
-
-        async void AddItem_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushModalAsync(new NavigationPage(new NewFoodItemPage()));
         }
 
         protected override void OnAppearing()
