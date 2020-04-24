@@ -108,7 +108,7 @@ namespace Fridgr.Views
                 return;
             }
             
-            var foods = App.currentUser.Foods;
+            var foods = App.currentUser.Foods ?? new Food[0];
             App.currentUser.Foods = new Food[foods.Length + 1];
             for (int i = 0; i < foods.Length; i++)
             {
@@ -118,6 +118,12 @@ namespace Fridgr.Views
             App.currentUser.Foods[foods.Length] = food;
             var bson = food.ToBsonDocument();
             bson.Remove("FoodItem");
+
+            if (App.currentUser.FoodIds == null)
+            {
+                App.currentUser.FoodIds = new BsonArray();
+            }
+            
             App.currentUser.FoodIds.Insert(App.currentUser.FoodIds.Count, bson);
             
             await User.DataStore.UpdateItemAsync(App.currentUser);

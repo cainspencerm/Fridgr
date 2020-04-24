@@ -20,11 +20,10 @@ namespace Fridgr.Models.Database
 
         public Food(BsonDocument document)
         {
-            FoodItemId = document.GetElement("foodItem").Value.AsObjectId;
-            //FoodItem = FoodItem.DataStore.GetItemAsync(FoodItemId.ToString()).Result;
-            PurchaseDate = document.GetElement("purchaseDate").Value.ToUniversalTime();
-            ExpirationDate = document.GetElement("expirationDate").Value.ToUniversalTime();
-            Servings = document.GetElement("servings").Value.AsInt32;
+            FoodItemId = document.Contains("foodItem") ? document.GetElement("foodItem").Value.AsObjectId : ObjectId.Empty;
+            PurchaseDate = document.Contains("purchaseDate") ? document.GetElement("purchaseDate").Value.ToUniversalTime() : DateTime.MinValue;
+            ExpirationDate = document.Contains("expirationDate") ? document.GetElement("expirationDate").Value.ToUniversalTime() : DateTime.MinValue;
+            Servings = document.Contains("servings") ? document.GetElement("servings").Value.AsInt32 : 0;
         }
 
         public Food(FoodItem foodItem)
