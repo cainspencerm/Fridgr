@@ -47,7 +47,15 @@ namespace Fridgr.Views
         {
             if (CheckLogin(entry_email.Text, entry_pw.Text))
             {
-                App.currentUser = User.DataStore.GetItemAsync(entry_email.Text, entry_pw.Text).Result;
+                var user = App.UserCollection.Find(u => u.Email == entry_email.Text).FirstOrDefaultAsync().Result;
+                user.Foods = new Food[user.FoodIds.Count];
+                for (int i = 0; i < user.FoodIds.Count; i++)
+                {
+                    var doc = user.FoodIds[i].AsBsonDocument;
+                    user.Foods[i] = new Food(doc);
+                }
+            
+                App.currentUser = user;
                 App.NavPage = new MainPage();
                 await Navigation.PushAsync(App.NavPage);
             } else
