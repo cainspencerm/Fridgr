@@ -65,7 +65,7 @@ namespace Fridgr.Views
 
             ResetPasswordButton_OnPressed(null, null);
             
-            await DisplayAlert("Password Changed", null, "Retry");
+            await DisplayAlert("Password Changed", null, "Close");
         }
     }
 }
